@@ -1,6 +1,8 @@
 require('colors')
+const path = require('path')
 const webpack = require('webpack')
 const config = require('./webpack.config')
+const child_process = require('child_process')
 
 process.env.NODE_ENV = 'production'
 
@@ -11,4 +13,5 @@ webpack(config, function(err, stats) {
     } else {
         throw err
     }
+    child_process.exec(`rm -rf ${path.join(__dirname, '../tmp')}`)
 })

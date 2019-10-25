@@ -8,12 +8,7 @@ Promise.all([start('error-reporter', config)]).catch((err) => {
 
 function start(target, webpackConf) {
     return new Promise((resolve, reject) => {
-        const compiler = webpack(
-            Object.assign({}, webpackConf, {
-                entry: { [target]: webpackConf.entry[target] }
-            })
-        )
-
+        const compiler = webpack(webpackConf)
         compiler.hooks.afterEmit.tapAsync('after-emit', (compilation, done) => {
             const date = new Date()
             console.log(

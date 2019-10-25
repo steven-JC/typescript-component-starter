@@ -1,5 +1,4 @@
 require('colors')
-const webpack = require('webpack')
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
@@ -30,6 +29,17 @@ module.exports = {
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
+
+    plugins: [
+        new CopyWebpackPlugin([
+            {
+                context: 'tmp',
+                from: '**/*.d.ts',
+                to: 'types/',
+                force: true
+            }
+        ])
+    ],
 
     resolve: {
         alias: {

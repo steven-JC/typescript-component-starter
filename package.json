@@ -3,15 +3,14 @@
     "version": "0.1.2",
     "description": "An error reporter toolkit for tumax.",
     "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "types": "dist/types/index.d.ts",
     "files": [
         "dist"
     ],
     "scripts": {
         "dev": "node build/dev.js",
-        "tsc": "tsc -w",
-        "build": "node build/build.js",
-        "prepare": "tsc",
+        "build": "tsc && node build/build.js",
+        "prepare": "yarn build",
         "test": "mocha",
         "tdd": "mocha --watch --watch-extensions js --recursive --inspect --full-trace --bail --debug --async-only --timeout 100"
     },
