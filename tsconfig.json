@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "rootDir": "src",
+        "rootDir": "./",
         "baseUrl": "src",
         "outDir": "tmp",
         "module": "commonjs",
@@ -17,8 +17,11 @@
         "esModuleInterop": true,
         "strictNullChecks": false,
         "noImplicitAny": false,
-        "allowSyntheticDefaultImports": true
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@/*": ["src/*"]
+        }
     },
     "include": ["src/*", "demo/serve.ts"],
-    "exclude": ["node_modules", "tmp"]
+    "exclude": ["node_modules", "tmp", "demo"]
 }

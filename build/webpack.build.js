@@ -44,7 +44,7 @@ module.exports = {
     plugins: [
         new CopyWebpackPlugin([
             {
-                context: 'tmp',
+                context: 'tmp/src',
                 from: '**/*.d.ts',
                 to: 'types/',
                 force: true

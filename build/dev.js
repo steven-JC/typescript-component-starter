@@ -1,7 +1,9 @@
 require('colors')
+
+process.env.NODE_ENV = 'development'
+
 const webpack = require('webpack')
 const config = require('./webpack.build')
-process.env.NODE_ENV = 'development'
 Promise.all([start('component build succeed!', config)]).catch((err) => {
     console.error(err)
 })
