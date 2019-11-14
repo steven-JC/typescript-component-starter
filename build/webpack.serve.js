@@ -8,7 +8,8 @@ process.env.BABEL_ENV = 'gui'
 module.exports = {
     mode: 'development',
     entry: {
-        index: path.join(__dirname, '../demo/serve.ts')
+        serve: path.join(__dirname, '../demo/serve.ts'),
+        dev: path.join(__dirname, '../demo/dev.ts')
     },
     output: {
         publicPath: '',
@@ -43,7 +44,17 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: `demo/serve.html`,
             inject: 'body',
+            chunks: ['serve'],
             showErrors: true,
+            cache: false,
+            filename: `serve.html`
+        }),
+        new HtmlWebpackPlugin({
+            template: `demo/dev.html`,
+            inject: 'body',
+            chunks: ['dev'],
+            showErrors: true,
+            filename: `index.html`,
             cache: false
         })
     ],
@@ -58,8 +69,7 @@ module.exports = {
     devtool: '#cheap-module-eval-source-map',
     target: 'web',
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
-        port: 8111,
-        open: true
+        contentBase: path.resolve(__dirname, '../'),
+        port: 8111
     }
 }
