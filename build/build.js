@@ -1,7 +1,7 @@
 require('colors')
 const path = require('path')
 const webpack = require('webpack')
-const config = require('./webpack.config')
+const config = require('./webpack.build')
 const child_process = require('child_process')
 
 process.env.NODE_ENV = 'production'

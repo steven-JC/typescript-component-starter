@@ -1,9 +1,9 @@
 export default (
-    url,
+    url: string,
     data = {},
     method: 'GET' | 'POST' = 'GET',
     sync = false,
-    headers = {}
+    headers: any = {}
 ) => {
     return new Promise((r, rj) => {
         const xmlhttp = new XMLHttpRequest()
@@ -43,8 +43,8 @@ export default (
     })
 }
 
-function stringify(data) {
-    const res = []
+function stringify(data: any) {
+    const res: string[] = []
     for (const x in data) {
         if (data.hasOwnProperty(x)) {
             res.push(`${x}=${encodeURIComponent(data[x])}`)

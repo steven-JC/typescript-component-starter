@@ -1,10 +1,10 @@
 import request from './request'
-export default class {
-    protected url: string = ''
-    protected errors: Error[] = []
-    constructor(options) {}
-    public async report(data) {
-        const res = await request(this.url, data)
+export default class Starter {
+    constructor(url: string) {
+        this.report(url)
     }
-    public saveToLocal(handler) {}
+    public async report(url: string) {
+        const res = await request(url)
+        console.log(res)
+    }
 }

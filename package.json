@@ -1,7 +1,7 @@
 {
-    "name": "error-reporter",
+    "name": "starter",
     "version": "0.1.2",
-    "description": "An error reporter toolkit for tumax.",
+    "description": "",
     "main": "dist/index.js",
     "types": "dist/types/index.d.ts",
     "files": [
@@ -9,6 +9,7 @@
     ],
     "scripts": {
         "dev": "node build/dev.js",
+        "serve": "webpack-dev-server --inline --hot --config build/webpack.serve.js",
         "build": "tsc && node build/build.js",
         "prepare": "yarn build",
         "test": "mocha",

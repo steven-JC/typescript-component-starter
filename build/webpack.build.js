@@ -1,10 +1,9 @@
 require('colors')
 const path = require('path')
+const pkg = require('../package.json')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const isProd = process.env.NODE_ENV === 'production'
-
-process.env.BABEL_ENV = 'gui'
 
 module.exports = {
     mode: isProd ? 'production' : 'development',
@@ -18,6 +17,18 @@ module.exports = {
                 test: /\.js$/,
                 use: 'babel-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /\.(json)$/,
+                loader: 'json-loader'
+            },
+            {
+                test: /\.(jpg|png|woff|woff2|eot|ttf|svg|mp3|mp4)$/,
+                loader: 'url-loader?limit=1000',
+                options: {
+                    limit: 10000,
+                    name: 'assets/[name].[ext]?[hash:8]'
+                }
             }
         ]
     },
@@ -25,7 +36,7 @@ module.exports = {
         path: path.join(__dirname, '../dist'),
         publicPath: '',
         filename: `[name].js`,
-        library: '[name]',
+        library: pkg.name,
         libraryTarget: 'umd',
         umdNamedDefine: true
     },
