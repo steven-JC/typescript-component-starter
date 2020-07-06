@@ -1,15 +1,12 @@
-require('colors')
 const path = require('path')
 
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-process.env.BABEL_ENV = 'gui'
 
 module.exports = {
     mode: 'development',
     entry: {
-        serve: path.join(__dirname, '../demo/serve.ts'),
-        dev: path.join(__dirname, '../demo/dev.ts')
+        index: path.join(__dirname, '../demo/index.ts')
     },
     output: {
         publicPath: '',
@@ -18,16 +15,32 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'ts-loader' },
+            {
+                test: /\.tsx?$/,
+                exclude: [/node_modules/],
+                use: [
+                    {
+                        loader: 'cache-loader'
+                    },
+                    {
+                        loader: 'ts-loader',
+                        query: {
+                            // appendTsSuffixTo: [/.vue$/]
+                        }
+                    }
+                ]
+            },
             {
                 test: /\.js$/,
-                use: 'babel-loader',
+                use: [
+                    {
+                        loader: 'cache-loader'
+                    },
+                    'babel-loader'
+                ],
                 exclude: /node_modules/
             },
-            {
-                test: /\.(json)$/,
-                loader: 'json-loader'
-            },
+
             {
                 test: /\.(jpg|png|woff|woff2|eot|ttf|svg|mp3|mp4)$/,
                 loader: 'url-loader?limit=1000',
@@ -42,20 +55,12 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
-            template: `demo/serve.html`,
+            template: `demo/index.html`,
             inject: 'body',
-            chunks: ['serve'],
+            chunks: ['index'],
             showErrors: true,
             cache: false,
-            filename: `serve.html`
-        }),
-        new HtmlWebpackPlugin({
-            template: `demo/dev.html`,
-            inject: 'body',
-            chunks: ['dev'],
-            showErrors: true,
-            filename: `index.html`,
-            cache: false
+            filename: `index.html`
         })
     ],
 

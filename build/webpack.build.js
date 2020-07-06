@@ -12,16 +12,33 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'ts-loader' },
+            {
+                test: /\.tsx?$/,
+                exclude: [/node_modules/],
+                use: [
+                    {
+                        loader: 'cache-loader'
+                    },
+                    {
+                        loader: 'ts-loader',
+                        query: {
+                            transpileOnly: true
+                            // appendTsSuffixTo: [/.vue$/]
+                        }
+                    }
+                ]
+            },
             {
                 test: /\.js$/,
-                use: 'babel-loader',
-                exclude: /node_modules/
+                use: [
+                    {
+                        loader: 'cache-loader'
+                    },
+                    'babel-loader'
+                ],
+                exclude: [/node_modules/]
             },
-            {
-                test: /\.(json)$/,
-                loader: 'json-loader'
-            },
+
             {
                 test: /\.(jpg|png|woff|woff2|eot|ttf|svg|mp3|mp4)$/,
                 loader: 'url-loader?limit=1000',
